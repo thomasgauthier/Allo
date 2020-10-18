@@ -9,6 +9,10 @@ client.on('ready', () => {
 
 client.on('message', msg => {
   if (msg.author.id != client.user.id) {
+    if (msg.mentions.users.size && msg.mentions.users.some(u => u.id === client.user.id)) {
+      msg.reply("allo");
+    }
+
     if (msg.content.match(/(^|\W)allo(\W|$)/gi)) {
       msg.channel.send("allo");
       msg.react("👋");
