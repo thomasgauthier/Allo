@@ -1,7 +1,7 @@
-const Discord = require('discord.js');
+const { Client, MessageAttachment } = require('discord.js');
 const levenshtein = require('js-levenshtein');
 
-const client = new Discord.Client();
+const client = new Client();
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -26,6 +26,12 @@ client.on('message', msg => {
 
     if (msg.content.match(/^nice$/i)) {
       msg.channel.send("nice");
+      return;
+    }
+
+    if (msg.content.match(/(^|\W)feel(\W|$)/gi)) {
+      const attachment = new MessageAttachment('https://i.imgur.com/fccpbPf.jpg');
+      msg.channel.send("", attachment);
       return;
     }
 
