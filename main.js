@@ -24,7 +24,7 @@ client.on('message', msg => {
       return;
     }
 
-    if (msg.content === "nice") {
+    if (msg.content.match(/^nice$/i)) {
       msg.channel.send("nice");
       return;
     }
