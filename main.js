@@ -30,8 +30,10 @@ client.on('message', msg => {
     }
 
     if (msg.content.match(/(^|\W)feel(\W|$)/gi)) {
-      const attachment = new MessageAttachment('https://i.imgur.com/fccpbPf.jpg');
-      msg.channel.send("", attachment);
+      const reactionEmoji = msg.guild.emojis.cache.find(emoji => emoji.name === 'feeeel');
+      if (reactionEmoji) {
+        msg.react(reactionEmoji);
+      }
       return;
     }
 
