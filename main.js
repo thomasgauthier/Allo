@@ -3,6 +3,14 @@ const levenshtein = require('js-levenshtein');
 
 const client = new Client();
 
+async function complimentAsync (url, msg, target) {
+  let response = await fetch(url);
+  let data = await response.json();
+
+  let compliment = data['compliment']
+  msg.channel.send("<@" + target + ">, " + compliment);
+}
+
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
@@ -63,6 +71,20 @@ client.on('message', msg => {
           msg.reply(`No user ${role} found, did you mean ${scores[0].name}?`);
         }
       }
+    }
+    
+    if (msg.content.match(/(^|\W)-😘(\W|$)/gi)){
+      let targetMembers = msg.mentions.members;
+      if (targetMembers.size > 0){
+        targetMembers.forEach(target => {
+          complimentAsync('https://complimentr.com/api', msg, target)
+        });
+      }
+      else{
+        complimentAsync('https://complimentr.com/api', msg, msg.author)
+      }
+      
+      return;
     }
   }
 
