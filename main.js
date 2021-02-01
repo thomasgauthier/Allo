@@ -1,4 +1,5 @@
 const { Client, MessageAttachment } = require('discord.js');
+const fetch = require('node-fetch');
 const levenshtein = require('js-levenshtein');
 
 const client = new Client();
